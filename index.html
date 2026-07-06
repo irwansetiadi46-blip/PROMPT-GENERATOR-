@@ -1,0 +1,2012 @@
+<!-- **Gambar Thumbnail** -->
+<div class="separator" style="clear: both;"><a href="https://lh3.google.com/u/4/d/1sSsbkhaXwRzrd1EYOdyxb8QoPjchjvOo=s2048?auditContext=thumbnail" style="display: none; padding: 1em 0; text-align: center; "><img alt="" border="0" data-original-height="1152" data-original-width="2048" src="https://lh3.google.com/u/4/d/1sSsbkhaXwRzrd1EYOdyxb8QoPjchjvOo=s2048?auditContext=thumbnail"/></a></div>
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WAR MACHINE - Super Masterprompt Engine</title>
+    <style>
+        /* ---------- RESET ---------- */
+        .wm-wrapper-block * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* ---------- CONTAINER UTAMA ---------- */
+        .war-machine-container {
+            width: 100%;
+            max-width: 1000px;
+            background-color: #111827;
+            border: 2px solid #2a3b5c;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            margin: 20px auto;
+        }
+
+        /* ---------- BANNER GAMBAR (opsional) ---------- */
+        .wm-image-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #0f172a;
+            padding: 20px 20px 10px 20px;
+            border-bottom: 2px solid #2a3b5c;
+        }
+        .wm-image-wrapper img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        /* ---------- HEADER ---------- */
+        .wm-header {
+            background-color: #0f172a;
+            padding: 15px;
+            text-align: center;
+            border-bottom: 2px solid #2a3b5c;
+        }
+        .wm-header .sub {
+            color: #ffffff;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: bold;
+        }
+        .wm-header .title {
+            color: #f97316;
+            font-size: 24px;
+            font-weight: 900;
+            letter-spacing: 0.5px;
+            margin-top: 2px;
+        }
+
+        /* ---------- LAYOUT: SATU KOLOM ---------- */
+        .wm-main-layout {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ---------- FORM PANEL ---------- */
+        .wm-form-panel {
+            background-color: #aab5ff;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+        .wm-wrapper-block .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .wm-wrapper-block .form-group label {
+            color: #ffffff;
+            font-size: 13px;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+        }
+
+        .wm-wrapper-block .form-group input[type="text"],
+        .wm-wrapper-block .form-group input[type="password"],
+        .wm-wrapper-block .form-group select,
+        .wm-wrapper-block .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 6px;
+            background-color: #ffffff;
+            color: #1e293b;
+            font-size: 14px;
+            outline: none;
+            transition: all 0.2s ease-in-out;
+        }
+        .wm-wrapper-block .form-group input:focus,
+        .wm-wrapper-block .form-group select:focus,
+        .wm-wrapper-block .form-group textarea:focus {
+            box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.5);
+        }
+
+        /* API KEY WRAPPER */
+        .api-input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+            width: 100%;
+        }
+        .api-input-wrapper input {
+            padding-right: 95px !important;
+        }
+        .api-actions {
+            position: absolute;
+            right: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .api-icon-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            fill: #64748b;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4px;
+            transition: fill 0.2s, transform 0.1s;
+        }
+        .api-icon-btn:hover {
+            fill: #ea580c;
+            transform: scale(1.1);
+        }
+        .api-status-icon {
+            display: none;
+            fill: #10b981;
+            width: 18px;
+            height: 18px;
+        }
+
+        /* QUANTITY SLIDER */
+        .qty-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .qty-box {
+            width: 55px;
+            padding: 8px;
+            background: #ffffff;
+            border-radius: 6px;
+            text-align: center;
+            font-weight: bold;
+            color: #1e293b;
+            font-size: 15px;
+        }
+        .qty-slider {
+            flex: 1;
+            accent-color: #ea580c;
+            cursor: pointer;
+        }
+
+        /* BUTTONS */
+        .btn-create {
+            background-color: #f97316;
+            color: #ffffff;
+            border: none;
+            padding: 14px;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: bold;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.25s ease-in-out;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+        }
+        .btn-create:hover {
+            background-color: #ea580c;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 14px rgba(234, 88, 12, 0.4);
+        }
+        .btn-create:disabled {
+            background-color: #94a3b8;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .action-buttons-group {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .btn-download {
+            background-color: #10b981;
+            color: #ffffff;
+            border: none;
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+        }
+        .btn-download:hover {
+            background-color: #059669;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(16, 185, 129, 0.3);
+        }
+        .btn-delete {
+            background-color: #ef4444;
+            color: #ffffff;
+            border: none;
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+        }
+        .btn-delete:hover {
+            background-color: #dc2626;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(239, 68, 68, 0.3);
+        }
+
+        .spinner {
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: #ffffff;
+            animation: spin 0.8s linear infinite;
+            display: none;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* ---------- OUTPUT PANEL ---------- */
+        .wm-output-panel {
+            padding: 20px;
+            background-color: #111827;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .output-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #1e293b;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .status-text {
+            color: #94a3b8;
+            font-size: 14px;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+        }
+
+        /* ---------- KONTAINER KHUSUS UNTUK LIST PROMPT ---------- */
+        .prompt-list-container {
+            background-color: #1e293b;
+            border-radius: 8px;
+            padding: 12px;
+            max-height: 700px;
+            min-height: 400px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .prompt-list-container::-webkit-scrollbar {
+            width: 8px;
+        }
+        .prompt-list-container::-webkit-scrollbar-track {
+            background: #111827;
+            border-radius: 4px;
+        }
+        .prompt-list-container::-webkit-scrollbar-thumb {
+            background: #2a3b5c;
+            border-radius: 4px;
+        }
+
+        /* ---------- ITEM PROMPT ---------- */
+        .prompt-item {
+            display: flex;
+            align-items: stretch;
+            background-color: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            animation: fadeIn 0.3s ease-in-out;
+            min-height: 70px;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .prompt-num {
+            background-color: #f8fafc;
+            color: #1e293b;
+            font-weight: bold;
+            width: 42px;
+            min-height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-right: 1px solid #e2e8f0;
+            font-size: 15px;
+            flex-shrink: 0;
+        }
+
+        .prompt-text {
+            flex: 1;
+            padding: 16px 18px;
+            color: #1e293b;
+            font-size: 15px;
+            line-height: 1.7;
+            border: none;
+            resize: none;
+            background: transparent;
+            outline: none;
+            font-family: inherit;
+            height: auto;
+            min-height: 70px;
+            overflow-y: auto;
+            word-wrap: break-word;
+            white-space: pre-wrap;
+        }
+
+        .btn-copy {
+            background-color: #ffffff;
+            border: none;
+            width: 50px;
+            min-height: 70px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-left: 1px solid #e2e8f0;
+            fill: #f97316;
+            transition: background 0.2s, fill 0.2s;
+            flex-shrink: 0;
+        }
+        .btn-copy:hover {
+            background-color: #f1f5f9;
+            fill: #ea580c;
+        }
+
+        /* ---------- TOAST ---------- */
+        .toast-notif {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background-color: #10b981;
+            color: #ffffff;
+            padding: 10px 24px;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 14px;
+            box-shadow: 0 6px 20px rgba(16,185,129,0.4);
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 9999;
+        }
+        .toast-notif.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* ---------- RESPONSIF ---------- */
+        @media (max-width: 1000px) {
+            .wm-form-panel {
+                padding: 16px;
+            }
+            .wm-output-panel {
+                padding: 16px;
+            }
+            .prompt-text {
+                font-size: 10px;
+                padding: 10px 10px;
+            }
+            .prompt-num {
+                width: 36px;
+                font-size: 13px;
+            }
+            .btn-copy {
+                width: 44px;
+            }
+            .prompt-list-container {
+                min-height: 500px;
+            }
+        }
+    </style>
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#111827">
+    <link rel="apple-touch-icon" href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj0yD7YVNT1YTpyeVUaXcm4Iit2alo469vB3s-8QE6SVtQ7G6qPQaA9KePSN5FK0L_l90icoCJd9KVK6wHVKJkzRVDHvWkaHUC1zlstpOilRiShVHx3LU-uXaq2Nto8_lcnrRLsi9r8Z5_-v3Xs_n_bmEWwzM1WsQ5YCXQ64XI0D0eQYE0SasDhYeIXA6U/s192/1000098443.png">
+</head>
+<body>
+
+<div class="wm-wrapper-block">
+    <div class="war-machine-container">
+
+        <!-- BANNER GAMBAR (Opsional) -->
+        <div class="wm-image-wrapper">
+            <img
+                src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj0yD7YVNT1YTpyeVUaXcm4Iit2alo469vB3s-8QE6SVtQ7G6qPQaA9KePSN5FK0L_l90icoCJd9KVK6wHVKJkzRVDHvWkaHUC1zlstpOilRiShVHx3LU-uXaq2Nto8_lcnrRLsi9r8Z5_-v3Xs_n_bmEWwzM1WsQ5YCXQ64XI0D0eQYE0SasDhYeIXA6U/s5632/1000098443.png"
+                alt="WAR MACHINE Banner"
+                width="1000"
+                loading="lazy"
+            />
+        </div>
+
+        <!-- HEADER -->
+        <div class="wm-header">
+            <div class="sub">Super Masterprompt Engine</div>
+            <div class="title">WAR MACHINE</div>
+        </div>
+
+        <!-- LAYOUT SATU KOLOM -->
+        <div class="wm-main-layout">
+
+            <!-- FORM PANEL -->
+            <div class="wm-form-panel">
+                <div class="form-group">
+                    <label>Api Key Gemini</label>
+                    <div class="api-input-wrapper">
+                        <input type="password" id="apiKey" placeholder="Masukkan API Key Gemini...">
+                        <div class="api-actions">
+                            <button class="api-icon-btn" id="btnToggleVisibility" title="Lihat/Sembunyikan API">
+                                <svg id="iconEye" viewBox="0 0 24 24" width="18" height="18"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+                            </button>
+                            <button class="api-icon-btn" id="btnSaveApi" title="Simpan API Key">
+                                <svg viewBox="0 0 24 24" width="18" height="18"><path d="M17 3H5c-1.1 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm-5 16c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm3-10H5V5h10v4z"/></svg>
+                            </button>
+                            <svg class="api-status-icon" id="iconLock" viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+                            <button class="api-icon-btn" id="btnClearApi" title="Hapus API Key" style="display:none;">
+                                <svg viewBox="0 0 24 24" width="18" height="18"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Gemini Model AI</label>
+                    <select id="modelSelector">
+                        <option value="gemini-3.1-flash-lite">Gemini 3.5 Flash</option>
+                        <option value="gemini-2.5-flash">Gemini 3.1 Flash Lite</option>
+                        <option value="gemini-2.5-flash-lite">Gemini 2.5 Flash</option>
+                        <option value="gemini-3.5-flash">Gemini 3.1 PRO</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>STYLE</label>
+                    <select id="styleSelector">                          
+                        <option value="Comercial Photo">Canon EOS</option>
+                        <option value="Photography">Hasselblad</option>
+                           <option value="Wallpaper">Wallpaper</option> <!-- TAMBAHAN -->
+                        <option value="Outline">Lineart</option>
+                        <option value="Flat Vector Bold Outline">Outline Fill</option>
+                        <option value="Flat Vector No Outline">Flat Vector</option>
+                        <option value="3D Claymorphism">3D</option>                    
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>CATEGORY</label>
+                    <select id="categorySelector"></select>
+                </div>
+
+                <div class="form-group">
+                    <label>Sub Category</label>
+                    <select id="subCategorySelector"></select>
+                </div>
+
+                <div class="form-group">
+                    <label>Niche</label>
+                    <select id="nicheSelector"></select>
+                </div>
+
+                <div class="form-group">
+                    <label>Quantity</label>
+                    <div class="qty-container">
+                        <div class="qty-box" id="qtyVal">3</div>
+                        <input type="range" id="qtySlider" class="qty-slider" min="1" max="10" value="3">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Prompt (Opsional)</label>
+                    <textarea id="specificInstruction" rows="3" placeholder="Tulis Deskripsi Spesifik atau Kosongkan..."></textarea>
+                </div>
+
+                <button class="btn-create" id="btnCreate">
+                    <div class="spinner" id="btnSpinner"></div>
+                    <span id="btnText">War Machine Arise</span>
+                </button>
+            </div>
+
+            <!-- OUTPUT PANEL -->
+            <div class="wm-output-panel">
+                <div class="output-header">
+                    <div class="status-text" id="statusText">PROMPT CREATED (0/0)</div>
+                    <div class="action-buttons-group">
+                        <button class="btn-delete" id="btnDeleteAll" style="display: none;">Clear</button>
+                        <button class="btn-download" id="btnDownload" style="display: none;">Download TXT</button>
+                    </div>
+                </div>
+                <!-- KONTAINER KHUSUS UNTUK LIST PROMPT -->
+                <div class="prompt-list-container" id="promptListContainer">
+                    <!-- Prompt akan muncul di sini -->
+                </div>
+            </div>
+
+        </div><!-- end wm-main-layout -->
+    </div><!-- end war-machine-container -->
+</div><!-- end wm-wrapper-block -->
+
+<!-- TOAST -->
+<div class="toast-notif" id="toastAlert">Copy</div>
+
+<script>
+// ============================================================
+// DATABASE 4 TINGKAT (STYLE → CATEGORY → SUB → NICHE)
+// ============================================================
+const warmachinedatabase = {
+    "Photography": {
+        "none": {"none":["none"]},
+        "Business": {
+            "none":["none"],
+            "Team Meeting": [ "none", "Team Meeting", "Meeting Session", "Corporate Discussion"],
+            "Leadership": ["none", "Leadership", "Executive Portrait", "Manager Conference"],
+            "Startup": ["none", "Startup Team", "Young Entrepreneurs", "Office Brainstorm"],
+            "Remote Work": ["none", "Remote Worker", "Home Office", "Digital Nomad"],
+            "Business Presentation": ["none", "Presentation", "Pitch Deck", "Boardroom Meeting"],
+            "Customer Service": ["none", "Customer Support", "Service Desk", "Client Interaction"],
+            "Office Workspace": ["none", "Modern Office", "Workspace", "Collaborative Area"],
+            "Corporate Portrait": ["none", "Portrait", "Professional Headshot", "Business Attire"],
+            "Financial Planning": ["none", "Financial Advisor", "Budget Planning", "Investment Meeting"],
+            "Success Concept": ["none", "Success", "Achievement", "Growth Mindset"]
+        },
+        "Lifestyle": {
+            "none":["none"],
+            "Morning Routine": ["none", "Morning Ritual", "Wake Up", "Fresh Start"],
+            "Healthy Lifestyle": ["none", "Health", "Wellness", "Active Life"],
+            "Home Living": ["none", "Home Interior", "Living Room", "Cozy Space"],
+            "Family Time": ["none", "Family", "Parents and Kids", "Quality Time"],
+            "Friendship": ["none", "Friends", "Hangout", "Group Activity"],
+            "Self Care": ["none", "Self Love", "Relaxation", "Pampering"],
+            "Relaxation": ["none", "Chill", "Leisure", "Comfort"],
+            "Work From Home": ["none", "WFH", "Home Office Setup", "Productive Home"],
+            "Digital Nomad": ["none", "Nomad", "Travel and Work", "Laptop Lifestyle"],
+            "Minimalist Lifestyle": ["none", "Minimalism", "Simple Living", "Declutter"]
+        },
+        "Healthcare": {
+            "none":["none"],
+            "Doctor": ["none", "Doctor", "Physician", "Medical Professional"],
+            "Nurse": ["none", "Nurse", "Healthcare Worker", "Caregiver"],
+            "Hospital": ["none", "Hospital", "Clinic", "Medical Facility"],
+            "Medical Consultation": ["none", "Consultation", "Patient Visit", "Health Check"],
+            "Patient Care": ["none", "Patient", "Care", "Treatment"],
+            "Telemedicine": ["none", "Telehealth", "Online Doctor", "Virtual Care"],
+            "Mental Health": ["none", "Mental Wellness", "Therapy", "Emotional Health"],
+            "Dental Care": ["none", "Dentist", "Teeth", "Oral Hygiene"],
+            "Healthy Eating": ["none", "Nutrition", "Healthy Food", "Diet"],
+            "Fitness": ["none", "Fitness", "Exercise", "Workout"]
+        },
+        "Technology": {
+            "none":["none"],
+            "Artificial Intelligence": ["none", "AI", "Machine Learning", "Deep Learning"],
+            "Cyber Security": ["none", "Security", "Cyber", "Data Protection"],
+            "Programming": ["none", "Coding", "Developer", "Software Engineer"],
+            "Data Analysis": ["none", "Data", "Analytics", "Big Data"],
+            "Cloud Computing": ["none", "Cloud", "Server", "Infrastructure"],
+            "Mobile Technology": ["none", "Smartphone", "App", "Mobile"],
+            "Smart Home": ["none", "Home Automation", "IoT", "Smart Device"],
+            "Virtual Reality": ["none", "VR", "Virtual Experience", "Immersive"],
+            "Robotics": ["none", "Robot", "Automation", "Mechanical"],
+            "Future Technology": ["none", "Futuristic", "Innovation", "Next Gen"]
+        },
+        "Food & Beverage": {
+            "none":["none"],
+            "Healthy Breakfast": ["none", "Breakfast", "Healthy Meal", "Morning Food"],
+            "Fresh Vegetables": ["none", "Vegetables", "Fresh Produce", "Greens"],
+            "Organic Food": ["none", "Organic", "Natural", "Farm Fresh"],
+            "Cooking": ["none", "Cooking", "Kitchen", "Chef"],
+            "Coffee": ["none", "Coffee", "Coffee", "Cafe", "Brew"],
+            "Bakery": ["none", "Bread", "Pastry", "Bakery Shop"],
+            "Restaurant": ["none", "Dining", "Restaurant", "Fine Dining"],
+            "Dessert": ["none", "Dessert", "Sweet", "Pastry"],
+            "Street Food": ["none", "Street Food", "Food Stall", "Local Delicacy"],
+            "Meal Preparation": ["none", "Meal Prep", "Food Planning", "Cooking Session"]
+        },
+        "Education": {
+            "none":["none"],
+            "Online Learning": ["none", "E-Learning", "Online Course", "Virtual Class"],
+            "Classroom": ["none", "Class", "School", "Lecture"],
+            "Teacher": ["none", "Teacher", "Instructor", "Educator"],
+            "Student": ["none", "Student", "Pupil", "Learner"],
+            "Library": ["none", "Library", "Reading", "Books"],
+            "Graduation": ["none", "Graduation", "Ceremony", "Degree"],
+            "STEM": ["none", "STEM", "Science", "Technology"],
+            "Research": ["none", "Research", "Study", "Discovery"],
+            "Reading": ["none", "Reading", "Book", "Literature"],
+            "School Activity": ["none", "School Event", "Activity", "Extracurricular"]
+        },
+        "Travel": {
+            "none":["none"],
+            "Adventure": ["none", "Adventure", "Exploration", "Outdoor"],
+            "Beach Vacation": ["none", "Beach", "Coastal", "Sun and Sand"],
+            "Mountain Hiking": ["none", "Mountain", "Hiking", "Nature Trek"],
+            "Camping": ["none", "Camping", "Tent", "Outdoors"],
+            "Road Trip": ["none", "Road Trip", "Drive", "Journey"],
+            "Luxury Travel": ["none", "Luxury", "Resort", "Premium"],
+            "Airport": ["none", "Airport", "Flight", "Travel Hub"],
+            "Hotel": ["none", "Hotel", "Accommodation", "Stay"],
+            "Backpacking": ["none", "Backpacker", "Budget Travel", "Adventure"],
+            "Tourism": ["none", "Tourist", "Sightseeing", "Cultural"]
+        },
+        "Nature": {
+            "none":["none"],
+            "Forest": ["none", "Forest", "Woods", "Trees"],
+            "Mountains": ["none", "Mountains", "Peak", "Scenery"],
+            "Beach": ["none", "Beach", "Ocean", "Coast"],
+            "Waterfall": ["none", "Waterfall", "Falls", "Cascade"],
+            "Sunrise": ["none", "Sunrise", "Dawn", "Morning Light"],
+            "Sunset": ["none", "Sunset", "Dusk", "Evening Glow"],
+            "Flowers": ["none", "Flowers", "Bloom", "Garden"],
+            "Wildlife": ["none", "Wildlife", "Animals", "Nature"],
+            "Green Environment": ["none", "Green", "Eco", "Sustainable"],
+            "Landscape": ["none", "Landscape", "Panorama", "Scenery"]
+        },
+        "Industry": {
+            "none":["none"],
+            "Factory": ["none", "Factory", "Manufacturing", "Plant"],
+            "Warehouse": ["none", "Warehouse", "Storage", "Logistics"],
+            "Construction": ["none", "Construction", "Building", "Site"],
+            "Engineer": ["none", "Engineer", "Technical", "Design"],
+            "Manufacturing": ["none", "Manufacturing", "Production", "Assembly"],
+            "Logistics": ["none", "Logistics", "Supply Chain", "Transport"],
+            "Heavy Machinery": ["none", "Heavy Equipment", "Machinery", "Industrial"],
+            "Renewable Energy": ["none", "Renewable", "Solar", "Wind"],
+            "Agriculture": ["none", "Agriculture", "Farming", "Crop"],
+            "Mining": ["Mining", "Excavation", "Extraction"]
+        }
+    },
+    "Vector": {
+        "none": {"none":["none"]},
+        "Business": {
+            "none":["none"],
+            "Office Worker": ["none", "Office Worker", "Employee", "Staff"],
+            "CEO": ["none", "CEO", "Executive", "Leader"],
+            "Manager": ["none", "Manager", "Supervisor", "Team Lead"],
+            "Customer Support": ["none", "Support", "Service", "Help Desk"],
+            "Salesperson": ["none", "Sales", "Retail", "Seller"],
+            "Freelancer": ["none", "Freelancer", "Independent", "Remote Worker"],
+            "Startup Founder": ["none", "Founder", "Entrepreneur", "Startup"],
+            "Team Collaboration": ["none", "Collaboration", "Teamwork", "Group Work"],
+            "Business Presentation": ["none", "Presentation", "Pitch", "Boardroom"],
+            "Marketing Specialist": ["none", "Marketing", "Promotion", "Digital Marketer"]
+        },
+        "Healthcare": {
+            "none":["none"],
+            "Doctor": ["none", "Doctor", "Physician", "Medic"],
+            "Nurse": ["none", "Nurse", "Carer", "Healthcare"],
+            "Dentist": ["none", "Dentist", "Dental", "Oral"],
+            "Pharmacist": ["none", "Pharmacist", "Pharmacy", "Drugs"],
+            "Surgeon": ["none", "Surgeon", "Surgery", "Operation"],
+            "Patient": ["none", "Patient", "Client", "Care Receiver"],
+            "Paramedic": ["none", "Paramedic", "Emergency", "Ambulance"],
+            "Medical Researcher": ["none", "Researcher", "Scientist", "Lab"],
+            "Therapist": ["none", "Therapist", "Counselor", "Mental Health"],
+            "Nutritionist": ["none", "Nutritionist", "Dietitian", "Health"]
+        },
+        "Education": {
+            "none":["none"],
+            "Teacher": ["none", "Teacher", "Educator", "Professor"],
+            "Student": ["none", "Student", "Pupil", "Learner"],
+            "Professor": ["none", "Professor", "Lecturer", "Academic"],
+            "School Kid": ["none", "School Kid", "Child", "Student"],
+            "Graduate": ["none", "Graduate", "Alumni", "Degree Holder"],
+            "Researcher": ["none", "Researcher", "Scholar", "Scientist"],
+            "Online Tutor": ["none", "Tutor", "Online Teacher", "E-Learning"],
+            "Librarian": ["none", "Librarian", "Library", "Book"],
+            "Scientist": ["none", "Scientist", "Researcher", "Lab"],
+            "School Staff": ["none", "Staff", "School Employee", "Admin"]
+        },
+        "Technology": {
+            "none":["none"],
+            "Programmer": ["none", "Programmer", "Developer", "Coder"],
+            "UI Designer": ["none", "UI Designer", "UX", "Interface"],
+            "AI Engineer": ["none", "AI Engineer", "Machine Learning", "Deep Learning"],
+            "Cyber Security Expert": ["none", "Cyber Security", "Ethical Hacker", "Security"],
+            "Data Scientist": ["none", "Data Scientist", "Analytics", "Big Data"],
+            "Game Developer": ["none", "Game Developer", "Game Designer", "Coding"],
+            "Robot Engineer": ["none", "Robot", "Automation", "Mechanical"],
+            "IT Support": ["none", "IT Support", "Helpdesk", "Tech Support"],
+            "Tech Startup": ["none", "Tech Startup", "Innovation", "Entrepreneur"],
+            "Digital Creator": ["none", "Content Creator", "Digital Artist", "Influencer"]
+        },
+        "Lifestyle": {
+            "none":["none"],
+            "Chef": ["none", "Chef", "Cook", "Culinary"],
+            "Barista": ["none", "Barista", "Coffee", "Cafe"],
+            "Traveler": ["none", "Traveler", "Tourist", "Adventurer"],
+            "Fitness Trainer": ["none", "Fitness Trainer", "Gym", "Coach"],
+            "Yoga Instructor": ["none", "Yoga", "Instructor", "Wellness"],
+            "Photographer": ["none", "Photographer", "Camera", "Visual"],
+            "Gardener": ["none", "Gardener", "Gardening", "Plants"],
+            "Homeowner": ["none", "Homeowner", "House", "Property"],
+            "Pet Owner": ["none", "Pet Owner", "Pet", "Animal"],
+            "Influencer": ["none", "Influencer", "Social Media", "Brand"]
+        },
+        "Construction": {
+            "none":["none"],
+            "Architect": ["none", "Architect", "Design", "Plan"],
+            "Civil Engineer": ["none", "Civil Engineer", "Structure", "Infrastructure"],
+            "Builder": ["none", "Builder", "Contractor", "Construction"],
+            "Electrician": ["none", "Electrician", "Wiring", "Electrical"],
+            "Plumber": ["none", "Plumber", "Plumbing", "Pipes"],
+            "Welder": ["none", "Welder", "Welding", "Metal"],
+            "Carpenter": ["none", "Carpenter", "Woodwork", "Joinery"],
+            "Surveyor": ["none", "Surveyor", "Measuring", "Land"],
+            "Heavy Equipment Operator": ["none", "Operator", "Excavator", "Machinery"],
+            "Safety Officer": ["Safety", "OSHA", "Compliance"]
+        },
+        "Finance": {
+            "none":["none"],
+            "Accountant": ["none", "Accountant", "Accounting", "Bookkeeping"],
+            "Financial Advisor": ["none", "Financial Advisor", "Planning", "Wealth"],
+            "Banker": ["none", "Banker", "Bank", "Finance"],
+            "Investor": ["none", "Investor", "Trading", "Stocks"],
+            "Cashier": ["none", "Cashier", "Payment", "Retail"],
+            "Auditor": ["none", "Auditor", "Audit", "Compliance"],
+            "Insurance Agent": ["none", "Insurance", "Agent", "Coverage"],
+            "Tax Consultant": ["none", "Tax", "Consultant", "Filing"],
+            "Economist": ["none", "Economist", "Economy", "Analysis"],
+            "Stock Trader": ["none", "Trader", "Stock", "Market"]
+        },
+        "Agriculture": {
+            "none":["none"],
+            "Farmer": ["none", "Farmer", "Agriculture", "Crops"],
+            "Gardener": ["none", "Gardener", "Garden", "Plants"],
+            "Fisherman": ["none", "Fisherman", "Fishing", "Seafood"],
+            "Livestock Worker": ["none", "Livestock", "Animal", "Farm"],
+            "Fruit Picker": ["none", "Fruit Picker", "Orchard", "Harvest"],
+            "Organic Farmer": ["none", "Organic", "Sustainable", "Natural"],
+            "Agronomist": ["none", "Agronomist", "Soil", "Crop Science"],
+            "Veterinarian": ["none", "Veterinarian", "Animal Health", "Clinic"],
+            "Beekeeper": ["none", "Beekeeper", "Bees", "Honey"],
+            "Rice Farmer": ["none", "Rice", "Paddy", "Cultivation"]
+        },
+        "Food": {
+            "none":["none"],
+            "Chef": ["none", "Chef", "Cook", "Culinary"],
+            "Baker": ["none", "Baker", "Baking", "Pastry"],
+            "Waiter": ["none", "Waiter", "Service", "Restaurant"],
+            "Food Delivery": ["none", "Delivery", "Courier", "Food"],
+            "Restaurant Staff": ["none", "Restaurant", "Staff", "Service"],
+            "Food Vendor": ["none", "Vendor", "Street Food", "Market"],
+            "Pastry Chef": ["none", "Pastry", "Dessert", "Sweet"],
+            "Butcher": ["none", "Butcher", "Meat", "Cuts"],
+            "Barista": ["none", "Barista", "Coffee", "Cafe"],
+            "Nutrition Expert": ["none", "Nutrition", "Health", "Dietitian"]
+        },
+        "Holiday": {
+            "none":["none"],
+            "Santa Claus": ["none", "Santa", "Christmas", "Holiday"],
+            "Halloween Character": ["none", "Halloween", "Spooky", "Costume"],
+            "Easter Bunny": ["none", "Easter", "Bunny", "Spring"],
+            "Birthday Party": ["none", "Birthday", "Party", "Celebration"],
+            "Valentine Couple": ["none", "Valentine", "Romance", "Couple"],
+            "Christmas Family": ["none", "Christmas", "Family", "Gift"],
+            "New Year Celebration": ["none", "New Year", "Festival", "Fireworks"],
+            "Festival Costume": ["none", "Festival", "Costume", "Parade"],
+            "Gift Giving": ["none", "Gift", "Present", "Surprise"],
+            "Fireworks Celebration": ["none", "Fireworks", "Celebration", "Night Sky"]
+        }
+    },
+    // ========== TAMBAHAN WALLPAPER ==========
+  "Wallpaper": {
+"Anime": {
+
+        "Characters": [
+            "Anime Girl",
+            "Anime Boy",
+            "Fantasy Hero",
+            "Cyber Warrior",
+            "Samurai",
+            "Ninja",
+            "Mage",
+            "Knight",
+            "Elf",
+            "Fox Spirit",
+            "School Student",
+            "Idol",
+            "Princess",
+            "Demon Lord",
+            "Guardian"
+        ],
+
+        "Landscapes": [
+            "Cherry Blossom Street",
+            "Japanese Village",
+            "Fantasy Forest",
+            "Floating Islands",
+            "Mountain Shrine",
+            "Ocean Sunset",
+            "Rainy City",
+            "Snow Village",
+            "Bamboo Forest",
+            "Sky Kingdom",
+            "Ancient Temple",
+            "Starry Lake",
+            "Moonlit Garden",
+            "Flower Field",
+            "Cloud Kingdom"
+        ],
+
+        "Cityscapes": [
+            "Tokyo Night",
+            "Neon City",
+            "School Campus",
+            "Train Station",
+            "Shopping Street",
+            "Festival Street",
+            "Rooftop View",
+            "Harbor Town",
+            "Mountain Village",
+            "Modern Metropolis",
+            "Old Town",
+            "Castle Town",
+            "Floating City",
+            "Futuristic City",
+            "Countryside"
+        ],
+
+        "Fantasy Worlds": [
+            "Magic Academy",
+            "Spirit Realm",
+            "Dragon Kingdom",
+            "Crystal Cave",
+            "Ancient Ruins",
+            "Celestial Palace",
+            "Sacred Forest",
+            "Mystic River",
+            "Golden Castle",
+            "Dark Kingdom",
+            "Sky Temple",
+            "Floating Castle",
+            "Moon Kingdom",
+            "Sun Kingdom",
+            "Ancient Library"
+        ],
+
+        "Anime Styles": [
+            "Modern Anime",
+            "Fantasy Anime",
+            "Sci-Fi Anime",
+            "Romance Anime",
+            "Adventure Anime",
+            "Slice of Life",
+            "Isekai",
+            "Mecha Anime",
+            "Cyber Anime",
+            "Magical Girl",
+            "Shonen Style",
+            "Shojo Style",
+            "Seinen Style",
+            "Chibi Style",
+            "Cinematic Anime"
+        ]
+    },
+    "Fantasy": {
+
+        "Kingdoms": [
+            "Crystal Kingdom",
+            "Golden Kingdom",
+            "Frozen Kingdom",
+            "Floating Kingdom",
+            "Sky Kingdom",
+            "Moon Kingdom",
+            "Sun Kingdom",
+            "Elven Kingdom",
+            "Dwarven Kingdom",
+            "Ancient Empire",
+            "Lost Civilization",
+            "Royal Palace",
+            "Mystic Castle",
+            "Celestial Kingdom",
+            "Underground Kingdom"
+        ],
+
+        "Creatures": [
+            "Dragon",
+            "Phoenix",
+            "Griffin",
+            "Unicorn",
+            "Pegasus",
+            "Hydra",
+            "Wyvern",
+            "Sea Serpent",
+            "Basilisk",
+            "Kraken",
+            "Cerberus",
+            "Chimera",
+            "Fairy",
+            "Giant",
+            "Spirit Beast"
+        ],
+
+        "Magic": [
+            "Arcane Magic",
+            "Elemental Magic",
+            "Fire Magic",
+            "Ice Magic",
+            "Lightning Magic",
+            "Nature Magic",
+            "Dark Magic",
+            "Holy Magic",
+            "Runic Magic",
+            "Crystal Magic",
+            "Ancient Spell",
+            "Magic Circle",
+            "Wizard Tower",
+            "Magic Portal",
+            "Enchanted Relics"
+        ],
+
+        "Landscapes": [
+            "Enchanted Forest",
+            "Mystic Mountains",
+            "Floating Islands",
+            "Crystal Cave",
+            "Ancient Ruins",
+            "Sacred Temple",
+            "Magic River",
+            "Golden Valley",
+            "Frozen Lake",
+            "Celestial Garden",
+            "Dragon Valley",
+            "Moonlit Forest",
+            "Forgotten City",
+            "Sky Bridge",
+            "Hidden Sanctuary"
+        ],
+
+        "Artifacts": [
+            "Legendary Sword",
+            "Magic Staff",
+            "Ancient Crown",
+            "Crystal Orb",
+            "Runestone",
+            "Golden Chalice",
+            "Sacred Shield",
+            "Mystic Compass",
+            "Dragon Egg",
+            "Spell Book",
+            "Ancient Scroll",
+            "Magic Crystal",
+            "Royal Throne",
+            "Divine Hammer",
+            "Phoenix Feather"
+        ]
+    },
+
+    "Animals": {
+
+        "Wild Animals": [
+            "Lion",
+            "Tiger",
+            "Leopard",
+            "Jaguar",
+            "Wolf",
+            "Fox",
+            "Bear",
+            "Elephant",
+            "Rhino",
+            "Hippo",
+            "Giraffe",
+            "Zebra",
+            "Buffalo",
+            "Hyena",
+            "Cheetah"
+        ],
+
+        "Birds": [
+            "Eagle",
+            "Falcon",
+            "Hawk",
+            "Owl",
+            "Parrot",
+            "Macaw",
+            "Peacock",
+            "Flamingo",
+            "Swan",
+            "Kingfisher",
+            "Hummingbird",
+            "Raven",
+            "Crow",
+            "Cockatoo",
+            "Toucan"
+        ],
+
+        "Marine Life": [
+            "Whale",
+            "Shark",
+            "Dolphin",
+            "Orca",
+            "Sea Turtle",
+            "Octopus",
+            "Jellyfish",
+            "Manta Ray",
+            "Coral Reef",
+            "Koi Fish",
+            "Clownfish",
+            "Seahorse",
+            "Swordfish",
+            "Blue Tang",
+            "Sea Lion"
+        ],
+
+        "Reptiles": [
+            "Crocodile",
+            "Alligator",
+            "Komodo Dragon",
+            "Python",
+            "Cobra",
+            "Iguana",
+            "Chameleon",
+            "Gecko",
+            "Tortoise",
+            "Sea Snake",
+            "Monitor Lizard",
+            "Viper",
+            "Rattlesnake",
+            "Anaconda",
+            "Dragon Lizard"
+        ],
+
+        "Pets": [
+            "Golden Retriever",
+            "German Shepherd",
+            "Siberian Husky",
+            "Persian Cat",
+            "Maine Coon",
+            "British Shorthair",
+            "Rabbit",
+            "Hamster",
+            "Guinea Pig",
+            "Parakeet",
+            "Cockatiel",
+            "Goldfish",
+            "Betta Fish",
+            "Ferret",
+            "Corgi"
+        ]
+    },
+
+    "Nature": {
+
+        "Mountains": [
+            "Snow Mountain",
+            "Rocky Mountain",
+            "Alpine Peak",
+            "Volcanic Mountain",
+            "Misty Mountain",
+            "Highland",
+            "Glacier",
+            "Mountain Range",
+            "Cliff",
+            "Canyon",
+            "Sacred Peak",
+            "Sunrise Mountain",
+            "Moonlit Mountain",
+            "Frozen Summit",
+            "Green Hills"
+        ],
+
+        "Forests": [
+            "Rainforest",
+            "Pine Forest",
+            "Autumn Forest",
+            "Winter Forest",
+            "Bamboo Forest",
+            "Cherry Blossom Forest",
+            "Moss Forest",
+            "Foggy Forest",
+            "Redwood Forest",
+            "Tropical Jungle",
+            "Fantasy Forest",
+            "Dark Forest",
+            "Sacred Forest",
+            "Maple Forest",
+            "Ancient Woodland"
+        ],
+
+        "Water": [
+            "Waterfall",
+            "River",
+            "Lake",
+            "Ocean",
+            "Beach",
+            "Lagoon",
+            "Island",
+            "Glacier Lake",
+            "Hidden Cove",
+            "Coral Coast",
+            "Blue Lagoon",
+            "Rocky Shore",
+            "River Canyon",
+            "Tropical Beach",
+            "Emerald Lake"
+        ],
+
+        "Sky": [
+            "Aurora",
+            "Milky Way",
+            "Starry Sky",
+            "Moonlight",
+            "Sunrise",
+            "Sunset",
+            "Solar Eclipse",
+            "Lunar Eclipse",
+            "Rainbow",
+            "Storm Clouds",
+            "Blue Sky",
+            "Galaxy Sky",
+            "Meteor Shower",
+            "Nebula Sky",
+            "Northern Lights"
+        ],
+
+        "Seasons": [
+            "Spring",
+            "Summer",
+            "Autumn",
+            "Winter",
+            "Snowfall",
+            "Cherry Blossom",
+            "Golden Leaves",
+            "Frozen River",
+            "Blooming Flowers",
+            "Green Meadow",
+            "Harvest Field",
+            "Rainy Season",
+            "Dry Season",
+            "Morning Dew",
+            "Frost Landscape"
+        ]
+    },
+        "Sci-Fi": {
+
+        "Cyberpunk": [
+            "Neon City",
+            "Cyber Samurai",
+            "Cyber Ninja",
+            "Android",
+            "Cyborg",
+            "Neural Network",
+            "Holographic Street",
+            "Neon Alley",
+            "Mega Corporation",
+            "Rainy Night",
+            "Digital Market",
+            "AI District",
+            "Augmented Reality",
+            "Neon Skyline",
+            "Smart City"
+        ],
+
+        "Space Civilization": [
+            "Space Colony",
+            "Orbital Station",
+            "Galaxy Capital",
+            "Alien City",
+            "Space Port",
+            "Lunar Base",
+            "Mars Colony",
+            "Terraforming World",
+            "Deep Space Station",
+            "Asteroid Colony",
+            "Ring World",
+            "Dyson Sphere",
+            "Space Elevator",
+            "Quantum Gateway",
+            "Planetary Capital"
+        ],
+
+        "Technology": [
+            "Artificial Intelligence",
+            "Quantum Computer",
+            "Nanotechnology",
+            "Energy Core",
+            "Fusion Reactor",
+            "Digital Matrix",
+            "Hologram",
+            "Data Stream",
+            "Quantum Portal",
+            "Robot Factory",
+            "Drone Swarm",
+            "Cyber Interface",
+            "Virtual Reality",
+            "Digital Grid",
+            "Advanced Laboratory"
+        ],
+
+        "Mecha": [
+            "Combat Mecha",
+            "Heavy Mecha",
+            "Flying Mecha",
+            "Guardian Mecha",
+            "Battle Robot",
+            "Power Armor",
+            "Mecha Hangar",
+            "Assault Walker",
+            "Titan Robot",
+            "Defense Droid",
+            "Recon Mecha",
+            "Mecha Squadron",
+            "Mecha Pilot",
+            "Giant Robot",
+            "Mechanical Warrior"
+        ],
+
+        "Alien Worlds": [
+            "Alien Jungle",
+            "Crystal Planet",
+            "Ice Planet",
+            "Desert Planet",
+            "Ocean Planet",
+            "Volcanic Planet",
+            "Floating Planet",
+            "Bioluminescent Forest",
+            "Twin Suns",
+            "Alien Ruins",
+            "Exotic Mountains",
+            "Purple Desert",
+            "Living Planet",
+            "Gas Giant Moon",
+            "Unknown World"
+        ]
+    },
+
+    "Cars & Vehicles": {
+
+        "Sports Cars": [
+            "Supercar",
+            "Hypercar",
+            "Muscle Car",
+            "JDM Car",
+            "European Supercar",
+            "Luxury Coupe",
+            "GT Car",
+            "Concept Supercar",
+            "Track Car",
+            "Exotic Car",
+            "Grand Tourer",
+            "Street Racer",
+            "Electric Supercar",
+            "Carbon Hypercar",
+            "Widebody Car"
+        ],
+
+        "Motorcycles": [
+            "Superbike",
+            "Sport Bike",
+            "Cafe Racer",
+            "Naked Bike",
+            "Cruiser",
+            "Touring Bike",
+            "Adventure Bike",
+            "Motocross Bike",
+            "Electric Motorcycle",
+            "Custom Chopper",
+            "Vintage Motorcycle",
+            "Streetfighter",
+            "Racing Motorcycle",
+            "Scooter",
+            "Mini Bike"
+        ],
+
+        "Aircraft": [
+            "Fighter Jet",
+            "Stealth Fighter",
+            "Bomber",
+            "Attack Helicopter",
+            "Rescue Helicopter",
+            "Private Jet",
+            "Passenger Aircraft",
+            "Cargo Plane",
+            "Supersonic Jet",
+            "Space Shuttle",
+            "Rocket",
+            "Drone Aircraft",
+            "Flying Wing",
+            "Experimental Aircraft",
+            "VTOL Aircraft"
+        ],
+
+        "Ships": [
+            "Aircraft Carrier",
+            "Battleship",
+            "Destroyer",
+            "Cruise Ship",
+            "Luxury Yacht",
+            "Sailing Ship",
+            "Pirate Ship",
+            "Fishing Boat",
+            "Submarine",
+            "Hovercraft",
+            "Speed Boat",
+            "Catamaran",
+            "Icebreaker",
+            "Cargo Ship",
+            "River Boat"
+        ],
+
+        "Utility Vehicles": [
+            "Monster Truck",
+            "Pickup Truck",
+            "SUV",
+            "Fire Truck",
+            "Police Car",
+            "Ambulance",
+            "Excavator",
+            "Bulldozer",
+            "Dump Truck",
+            "Concrete Mixer",
+            "Forklift",
+            "Tractor",
+            "Camper Van",
+            "Armored Vehicle",
+            "Military Truck"
+        ]
+    },
+
+    "Space": {
+
+        "Celestial Bodies": [
+            "Galaxy",
+            "Nebula",
+            "Star Cluster",
+            "Black Hole",
+            "Supernova",
+            "Quasar",
+            "Planet",
+            "Moon",
+            "Comet",
+            "Asteroid Belt",
+            "Meteor Shower",
+            "Red Giant",
+            "White Dwarf",
+            "Pulsar",
+            "Binary Star"
+        ],
+
+        "Solar System": [
+            "Mercury",
+            "Venus",
+            "Earth",
+            "Mars",
+            "Jupiter",
+            "Saturn",
+            "Uranus",
+            "Neptune",
+            "Pluto",
+            "Moon Surface",
+            "Saturn Rings",
+            "Europa",
+            "Titan",
+            "Io",
+            "Ganymede"
+        ],
+
+        "Cosmic Phenomena": [
+            "Aurora From Space",
+            "Solar Flare",
+            "Cosmic Storm",
+            "Gamma Ray Burst",
+            "Space Lightning",
+            "Dark Matter",
+            "Wormhole",
+            "Gravity Lens",
+            "Quantum Rift",
+            "Time Distortion",
+            "Energy Wave",
+            "Cosmic Dust",
+            "Nebula Clouds",
+            "Stellar Nursery",
+            "Event Horizon"
+        ],
+
+        "Space Exploration": [
+            "Astronaut",
+            "Moon Mission",
+            "Mars Rover",
+            "Space Telescope",
+            "Satellite",
+            "Deep Space Probe",
+            "Space Dock",
+            "Launch Pad",
+            "Mission Control",
+            "Space Capsule",
+            "Orbital Flight",
+            "Lunar Rover",
+            "Planet Explorer",
+            "Research Vessel",
+            "Interstellar Mission"
+        ],
+
+        "Sci-Fi Space": [
+            "Alien Fleet",
+            "Battle Cruiser",
+            "Starfighter",
+            "Warp Gate",
+            "Space Armada",
+            "Planet Destroyer",
+            "Mother Ship",
+            "Orbital Cannon",
+            "Energy Shield",
+            "Galactic Empire",
+            "Cosmic Throne",
+            "Space Fortress",
+            "Ancient Star Gate",
+            "Alien Megastructure",
+            "Intergalactic War"
+        ]
+    },
+        "Architecture": {
+
+        "Modern Buildings": [
+            "Skyscraper",
+            "Glass Tower",
+            "Corporate Headquarters",
+            "Luxury Apartment",
+            "Business District",
+            "Modern Villa",
+            "Penthouse",
+            "Shopping Mall",
+            "Airport Terminal",
+            "Convention Center",
+            "Opera House",
+            "Museum",
+            "Library",
+            "Stadium",
+            "Observation Tower"
+        ],
+
+        "Historical Architecture": [
+            "Ancient Temple",
+            "Roman Colosseum",
+            "Greek Temple",
+            "Egyptian Pyramid",
+            "Medieval Castle",
+            "Gothic Cathedral",
+            "Renaissance Palace",
+            "Ancient Fortress",
+            "Stone Bridge",
+            "Ancient Amphitheater",
+            "Royal Palace",
+            "Monastery",
+            "Ancient City Gate",
+            "Ruined Castle",
+            "Watch Tower"
+        ],
+
+        "Asian Architecture": [
+            "Japanese Shrine",
+            "Japanese Castle",
+            "Chinese Palace",
+            "Chinese Pagoda",
+            "Korean Palace",
+            "Thai Temple",
+            "Balinese Temple",
+            "Torii Gate",
+            "Zen Garden",
+            "Traditional Village",
+            "Floating Temple",
+            "Bamboo House",
+            "Imperial Garden",
+            "Mountain Temple",
+            "Samurai Castle"
+        ],
+
+        "Futuristic Architecture": [
+            "Floating City",
+            "Cyber Tower",
+            "Arcology",
+            "Vertical Forest",
+            "Sky Bridge",
+            "Orbital Habitat",
+            "AI Megacity",
+            "Space Elevator",
+            "Crystal Megastructure",
+            "Underground City",
+            "Floating Resort",
+            "Neon Megacity",
+            "Eco City",
+            "Smart Tower",
+            "Solar City"
+        ],
+
+        "Fantasy Architecture": [
+            "Crystal Castle",
+            "Floating Palace",
+            "Golden Citadel",
+            "Moon Temple",
+            "Dragon Fortress",
+            "Wizard Tower",
+            "Elven City",
+            "Dwarven Hall",
+            "Celestial Palace",
+            "Ancient Sanctuary",
+            "Mystic Library",
+            "Sky Fortress",
+            "Sacred Shrine",
+            "Hidden Monastery",
+            "Magic Academy"
+        ]
+    },
+
+    "Abstract": {
+
+        "Geometry": [
+            "Low Poly",
+            "Hexagon Grid",
+            "Triangle Pattern",
+            "Circle Pattern",
+            "Cube Pattern",
+            "Wireframe",
+            "Sacred Geometry",
+            "Isometric Cubes",
+            "Geometric Tunnel",
+            "Polygon Mesh",
+            "Symmetrical Shapes",
+            "Minimal Geometry",
+            "Abstract Blocks",
+            "Angular Design",
+            "Diamond Pattern"
+        ],
+
+        "Fluid": [
+            "Liquid Metal",
+            "Fluid Paint",
+            "Ink Flow",
+            "Color Splash",
+            "Marble Texture",
+            "Oil Swirl",
+            "Acrylic Flow",
+            "Glass Liquid",
+            "Silk Waves",
+            "Abstract Smoke",
+            "Molten Gold",
+            "Water Ripples",
+            "Color Stream",
+            "Ink Clouds",
+            "Glossy Fluid"
+        ],
+
+        "Light Effects": [
+            "Neon Lines",
+            "Light Trails",
+            "Laser Grid",
+            "Glowing Particles",
+            "Energy Waves",
+            "Plasma Field",
+            "Electric Arc",
+            "Volumetric Glow",
+            "Rainbow Light",
+            "Prism Effect",
+            "Lens Flare",
+            "Aurora Waves",
+            "Digital Light",
+            "Holographic Glow",
+            "Light Rings"
+        ],
+
+        "Textures": [
+            "Carbon Fiber",
+            "Brushed Metal",
+            "Concrete Texture",
+            "Wood Pattern",
+            "Paper Texture",
+            "Fabric Texture",
+            "Stone Surface",
+            "Leather Texture",
+            "Crystal Texture",
+            "Ice Texture",
+            "Lava Texture",
+            "Sand Pattern",
+            "Cloud Texture",
+            "Foam Pattern",
+            "Granite Surface"
+        ],
+
+        "Artistic": [
+            "Fractal Art",
+            "Surreal Abstract",
+            "Dreamscape",
+            "Color Explosion",
+            "Particle Art",
+            "Digital Chaos",
+            "Minimal Waves",
+            "Gradient Flow",
+            "Luxury Marble",
+            "Golden Abstract",
+            "Crystal Energy",
+            "Infinity Loop",
+            "Modern Composition",
+            "Abstract Galaxy",
+            "Organic Forms"
+        ]
+    }
+  }
+};
+
+// ============================================================
+// UI LOGIC
+// ============================================================
+const styleSelector = document.getElementById('styleSelector');
+const categorySel = document.getElementById('categorySelector');
+const subCategorySel = document.getElementById('subCategorySelector');
+const nicheSel = document.getElementById('nicheSelector');
+const qtySlider = document.getElementById('qtySlider');
+const qtyVal = document.getElementById('qtyVal');
+const apiKeyInput = document.getElementById('apiKey');
+
+// API KEY
+function loadSavedApiKey() {
+    const savedKey = localStorage.getItem('wm_api_key');
+    if (savedKey) {
+        apiKeyInput.value = savedKey;
+        lockApiUI(true);
+    }
+}
+function lockApiUI(isLocked) {
+    if (isLocked) {
+        apiKeyInput.disabled = true;
+        document.getElementById('btnSaveApi').style.display = 'none';
+        document.getElementById('iconLock').style.display = 'block';
+        document.getElementById('btnClearApi').style.display = 'block';
+    } else {
+        apiKeyInput.disabled = false;
+        apiKeyInput.value = '';
+        document.getElementById('btnSaveApi').style.display = 'block';
+        document.getElementById('iconLock').style.display = 'none';
+        document.getElementById('btnClearApi').style.display = 'none';
+    }
+}
+document.getElementById('btnSaveApi').addEventListener('click', () => {
+    const key = apiKeyInput.value.trim();
+    if (key) {
+        localStorage.setItem('wm_api_key', key);
+        lockApiUI(true);
+        showToast("API Key Saved!");
+    } else {
+        alert("Ketik API Key-nya dulu bro!");
+    }
+});
+document.getElementById('btnClearApi').addEventListener('click', () => {
+    localStorage.removeItem('wm_api_key');
+    lockApiUI(false);
+    showToast("API Key Deleted!");
+});
+document.getElementById('btnToggleVisibility').addEventListener('click', () => {
+    if (apiKeyInput.type === 'password') {
+        apiKeyInput.type = 'text';
+        document.getElementById('iconEye').style.fill = '#f97316';
+    } else {
+        apiKeyInput.type = 'password';
+        document.getElementById('iconEye').style.fill = '#64748b';
+    }
+});
+
+function showToast(msg) {
+    const toast = document.getElementById('toastAlert');
+    toast.textContent = msg;
+    toast.classList.add('show');
+    setTimeout(() => { toast.classList.remove('show'); }, 2000);
+}
+
+// UPDATE DROPDOWN (dengan mapping Wallpaper)
+function updateCategories() {
+    const style = styleSelector.value;
+    let styleKey = '';
+    if (style === 'Comercial Photo' || style === 'Photography') {
+        styleKey = 'Photography';
+    } else if (style === 'Outline' || style === 'Flat Vector Bold Outline' ||
+               style === 'Flat Vector No Outline' || style === '3D Claymorphism') {
+        styleKey = 'Vector';
+    } else if (style === 'Wallpaper') {
+        styleKey = 'Wallpaper';
+    } else {
+        styleKey = 'Photography';
+    }
+
+    const data = warmachinedatabase[styleKey] || {};
+    categorySel.innerHTML = '';
+    for (let cat in data) {
+        let opt = document.createElement('option');
+        opt.value = cat;
+        opt.textContent = cat;
+        categorySel.appendChild(opt);
+    }
+    if (categorySel.options.length > 0) categorySel.selectedIndex = 0;
+    updateSubCategories();
+}
+function updateSubCategories() {
+    const style = styleSelector.value;
+    let styleKey = '';
+    if (style === 'Comercial Photo' || style === 'Photography') {
+        styleKey = 'Photography';
+    } else if (style === 'Outline' || style === 'Flat Vector Bold Outline' ||
+               style === 'Flat Vector No Outline' || style === '3D Claymorphism') {
+        styleKey = 'Vector';
+    } else if (style === 'Wallpaper') {
+        styleKey = 'Wallpaper';
+    } else {
+        styleKey = 'Photography';
+    }
+
+    const category = categorySel.value;
+    const categories = warmachinedatabase[styleKey] || {};
+    const subCats = categories[category] || {};
+    subCategorySel.innerHTML = '';
+    for (let sub in subCats) {
+        let opt = document.createElement('option');
+        opt.value = sub;
+        opt.textContent = sub;
+        subCategorySel.appendChild(opt);
+    }
+    if (subCategorySel.options.length > 0) subCategorySel.selectedIndex = 0;
+    updateNiches();
+}
+function updateNiches() {
+    const style = styleSelector.value;
+    let styleKey = '';
+    if (style === 'Comercial Photo' || style === 'Photography') {
+        styleKey = 'Photography';
+    } else if (style === 'Outline' || style === 'Flat Vector Bold Outline' ||
+               style === 'Flat Vector No Outline' || style === '3D Claymorphism') {
+        styleKey = 'Vector';
+    } else if (style === 'Wallpaper') {
+        styleKey = 'Wallpaper';
+    } else {
+        styleKey = 'Photography';
+    }
+
+    const category = categorySel.value;
+    const subCategory = subCategorySel.value;
+    const categories = warmachinedatabase[styleKey] || {};
+    const subCats = categories[category] || {};
+    const niches = subCats[subCategory] || [];
+    nicheSel.innerHTML = '';
+    niches.forEach(n => {
+        let opt = document.createElement('option');
+        opt.value = n;
+        opt.textContent = n;
+        nicheSel.appendChild(opt);
+    });
+    if (nicheSel.options.length > 0) nicheSel.selectedIndex = 0;
+}
+
+styleSelector.addEventListener('change', updateCategories);
+categorySel.addEventListener('change', updateSubCategories);
+subCategorySel.addEventListener('change', updateNiches);
+qtySlider.addEventListener('input', () => { qtyVal.textContent = qtySlider.value; });
+
+loadSavedApiKey();
+styleSelector.value = 'Comercial Photo';
+updateCategories();
+
+// DELETE ALL
+document.getElementById('btnDeleteAll').addEventListener('click', () => {
+    document.getElementById('promptListContainer').innerHTML = '';
+    document.getElementById('statusText').textContent = "PROMPT CREATED (0/0)";
+    document.getElementById('btnDeleteAll').style.display = 'none';
+    document.getElementById('btnDownload').style.display = 'none';
+    showToast("All Prompts Cleared!");
+});
+
+// ============================================================
+// GENERATOR
+// ============================================================
+document.getElementById('btnCreate').addEventListener('click', async () => {
+    const apiKey = apiKeyInput.value.trim();
+    const selectedModel = document.getElementById('modelSelector').value;
+    const style = styleSelector.value;
+    const category = categorySel.value;
+    const subCategory = subCategorySel.value;
+    const niche = nicheSel.value;
+    const quantity = qtySlider.value;
+    const instruction = document.getElementById('specificInstruction').value.trim();
+
+    const container = document.getElementById('promptListContainer');
+    const statusText = document.getElementById('statusText');
+    const btnDownload = document.getElementById('btnDownload');
+    const btnDeleteAll = document.getElementById('btnDeleteAll');
+    const btnCreate = document.getElementById('btnCreate');
+    const btnSpinner = document.getElementById('btnSpinner');
+    const btnText = document.getElementById('btnText');
+
+    if (!apiKey) {
+        alert('Isi dan simpan API Key Gemini lo dulu, bro!');
+        return;
+    }
+
+    btnCreate.disabled = true;
+    btnSpinner.style.display = 'block';
+    btnText.textContent = "WAR MACHINE RUNNING...";
+    statusText.textContent = "GENERATING PROMPTS... PLEASE WAIT";
+    container.innerHTML = '';
+    btnDownload.style.display = 'none';
+    btnDeleteAll.style.display = 'none';
+
+    let masterPattern = "";
+    if (style === "Outline") {
+        masterPattern = "A minimalist monoline line art [OBJECT/CHARACTER & ACTIVITY],center object, No text ,isolated on white background";
+    } else if (style === "Flat Vector Bold Outline") {
+        masterPattern = "A professional flat vector illustration of [OBJECT/CHARACTER & ACTIVITY], enclosed in solid thick bold black outlines, vibrant color,Flat design style,no text,no logo,center object isolated on white background";
+    } else if (style === "Flat Vector No Outline") {
+        masterPattern = "Premium minimalist flat vector illustration of [OBJECT/CHARACTER & ACTIVITY],pastel color,Flat designstyle, Center Object,No text,no logo,isolated on white background";
+    } else if (style === "3D Claymorphism") {
+        masterPattern = "High-end 3d render icon of [OBJECT/CHARACTER & ACTIVITY], modern claymorphism aesthetics, soft matte finish plastic textures, smooth ultra-rounded squircle corners visual aesthetics, stunning soft colorful lighting scheme, isolated on a blank,clean, and clear white background";
+    } else if (style === "Photography") {
+        masterPattern = "A high quality commercial photography of [OBJECT/CHARACTER,Atmosphere,ACTIVITY], relevant professional stock elements. Environment: Masterful composition matching the scene, clean frames, zero color cast, natural organic reflections and rich textures. Lighting: Masterful lighting setup, precise key light for soft depth, balanced fill light to retain subtle dimensional shadows, perfect highlights and natural micro-contrast. Camera & Lens: Shot on Hasselblad medium format camera, high-end prime lens, ultra-high resolution, sharp crisp focus on the central subject. Color & Tonal Qualities: Lifelike color accuracy, rich and smooth tonal transitions, soft organic drop-off blur, cinematic depth of field, premium professional presentation.";
+    } else if (style === "Comercial Photo") {
+        masterPattern = "ultra realistic commercial stock photography of [Concept Description...], photographed using a Canon EOS R5 with 35mm lens, photography theme [...], tone warm cinematic commercial lighting with golden sunlight, subtle orange glow, creamy exposure and soft faded shadows, realistic natural colors and clean bright atmosphere, Background [...] with soft blur and warm sunlight entering from [...], clean negative space on [...] , Composition [...] focusing on [...],Angle shoot from [...] perspective with shallow depth of field and realistic editorial framing, Skenario [...], warm sunlight creating soft rim light and subtle flare reflections on [...], emotionally positive and relatable storytelling, premium commercial stock aesthetic, no text, no logos, no brands, highly readable  concept [...].";
+    } else if (style === "Wallpaper") {
+    masterPattern = "Ultra detailed [STYLE] wallpaper featuring [MAIN SUBJECT Description ], highly artistic, premium quality, visually striking composition, [ atmosphere Description ], masterpiece, ultra high resolution, razor sharp details.Art Style:[ART STYLE / RENDER STYLE].Lighting:[LIGHTING].Color Palette:[COLOR PALETTE].Background:BACKGROUND].Composition:Dynamic composition, strong focal point, balanced visual hierarchy, perfect symmetry or rule of thirds as appropriate, immersive depth, clean layout suitable as wallpaper, no distracting elements.Mood:[MOOD].Effects:[Effect Description ,Example :Volumetric lighting, atmospheric particles, soft glow, realistic reflections, depth of field where appropriate, intricate textures, high contrast, premium finish].Quality:[Quality Description , Example :8K UHD, HDR, ultra realistic, highly detailed, crisp focus, professionaldigital artwork, trending on ArtStation, Unreal Engine quality,Octane Render, Redshift Render].Negative Prompt:text, logo, watermark, signature, frame, border, low quality, blurry, noisy, pixelated, cropped, duplicate objects, deformed anatomy, bad proportions, extra limbs, ugly face, artifacts, oversaturated colors.";
+}
+
+    // ========== INSTRUKSI KHUSUS WALLPAPER ==========
+        let wallpaperSpecific = '';
+    if (style === "Wallpaper") {
+        wallpaperSpecific = `
+🎨 SPESIALISASI WALLPAPER (WAJIB):
+- Ganti [ART STYLE / RENDER STYLE] dengan Category yang dipilih (Fantasy/Nature/Abstract/Anime/Minimalist) + deskripsi render style yang sesuai (misal: digital painting, 3D render, vector art, dll).
+- Ganti [MAIN SUBJECT Description] dengan Niche yang dipilih + deskripsi detail subjek utama (misal: "epic dragon flying over mountains", "cyberpunk city with neon lights").
+- Ganti [atmosphere Description] dengan deskripsi atmosfer yang immersive (contoh: "misty morning light", "dark stormy sky", "magical glowing forest").
+- Ganti [MOOD] dengan pilihan Mood: Peaceful, Epic, Dark, Dreamy, Mysterious, Futuristic, Magical, Elegant, Calm, Powerful.
+- Ganti [Effect Description] dengan deskripsi efek visual (contoh: "Volumetric lighting, atmospheric particles, soft glow, realistic reflections, depth of field, intricate textures, high contrast, premium finish").
+- Ganti [Quality Description] dengan deskripsi kualitas (contoh: "8K UHD, HDR, ultra realistic, highly detailed, crisp focus, professional digital artwork, trending on ArtStation, Unreal Engine quality, Octane Render, Redshift Render").
+- NEGATIVE PROMPT bawaan: text, logo, watermark, signature, frame, border, low quality, blurry, noisy, pixelated, cropped, duplicate objects, deformed anatomy, bad proportions, extra limbs, ugly face, artifacts, oversaturated colors.
+- JANGAN gunakan placeholder [OBJECT/CHARACTER & ACTIVITY] karena tidak relevan untuk Wallpaper.
+`;
+    } else {
+        wallpaperSpecific = `
+- Ganti [OBJECT/CHARACTER & ACTIVITY] dengan deskripsi sesuai Niche dan Sub Category.
+`;
+    }
+//===STRICT RULE MASTERPROMPT CORE ENGINE //===
+    const systemPrompt = `You are an elite prompt engineer. Your job is to output exactly ${quantity} lines of unique, highly scalable commercial image generation prompts.
+        
+You are the world's best AI Prompt Engineer and Senior Creative Director specializing in commercial microstock content for Adobe Stock, Shutterstock, Freepik, iStock, and other leading stock marketplaces.
+
+Your mission is to generate professional, highly commercial, original, and visually compelling image generation prompts that maximize stock marketplace acceptance and download potential.
+
+Always think like an experienced commercial stock contributor rather than an artist.
+
+Your highest priorities are:
+• Commercial value
+• High search demand
+• Wide usability
+• Evergreen concepts
+• Modern visual trends
+• Global audience appeal
+• Strong storytelling
+• Excellent composition
+• Technical realism
+• Marketplace compliance
+
+General Rules:
+Generate prompts that are unique, highly descriptive, and visually specific.
+Avoid generic descriptions.
+Describe the subject naturally using professional visual language.
+Always prioritize concepts that businesses, marketers, designers, publishers, and advertisers frequently need.
+Avoid copyrighted characters, logos, trademarks, brands, celebrity likenesses, political propaganda, hate symbols, and protected intellectual property.
+Avoid text, watermark, signatures, UI elements, labels, QR codes, timestamps, or visible branding unless explicitly requested.
+Create prompts suitable for commercial licensing.
+Encourage visual clarity, balanced composition, natural proportions, realistic lighting when applicable, and premium quality.
+When people are involved: Generate diverse ages, genders, ethnicities, and cultures whenever appropriate. Use natural body language, believable facial expressions, and realistic poses. Avoid awkward anatomy. Avoid duplicated limbs or distorted hands.
+When objects are involved: Focus on clean composition. Highlight important visual details. Keep unnecessary clutter to a minimum. Prefer isolated subjects or clean environments whenever appropriate.
+When backgrounds are involved: Keep backgrounds commercially useful. Allow copy space whenever appropriate. Avoid distracting elements.
+Always produce prompts that are visually rich but concise enough for modern image generation models.
+The prompt must read naturally as one continuous professional sentence instead of bullet points.
+Never explain your reasoning. Never include additional notes. Never include numbering. Never include quotation marks. Output only the final prompt.
+
+TARGET CONTEXT FROM DATABASE INTERFACE:
+- Category: ${category}
+- Sub Category: ${subCategory}
+- Niche Object Target: ${niche}
+
+👑 ABSOLUTE PRIORITY USER RULE (CRITICAL):
+The user has provided this Custom Instruction: "${instruction ? instruction : 'None'}" 
+If this instruction contains specific subjects, colors, layout rules, lighting variations, time, location, or backgrounds, you MUST treat it as the dominant master command. Merge it into the core pattern aggressively, prioritizing it above all default settings.
+
+STRUCTURAL COMPOSITION BLUEPRINT:
+Use this exact pattern layout for line construction (Ensure the prompt remains strictly as one continuous block/line of text without any literal internal linebreaks):
+"""
+${masterPattern}
+"""
+
+STRICT ARCHITECTURAL PROCESSING DIRECTIVES:
+1. Replace '[OBJECT/CHARACTER & ACTIVITY]' with descriptive variations of characters doing actions matching the sub category "${subCategory}" and target object "${niche}".
+2. TRADEMARK SAFETY RULE: Do not use Text or logo.
+3. OUTPUT EXECUTION FORMAT: You must only return lines of pure raw text. Exactly 1 complete prompt configuration per line. No line numbering, no markdown formatting, no code blocks, and no wrapping quotation marks. Do not inject any internal line breaks inside a single prompt block. All text must be in English.
+
+${wallpaperSpecific}`;
+
+    try {
+        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${selectedModel}:generateContent?key=${apiKey}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                contents: [{ parts: [{ text: systemPrompt }] }]
+            })
+        });
+
+        const data = await response.json();
+        if (data.error) throw new Error(data.error.message);
+
+        const textResponse = data.candidates[0].content.parts[0].text.trim();
+        const promptsArray = textResponse.split('\n').map(p => p.trim()).filter(p => p.length > 0);
+
+        statusText.textContent = `PROMPT CREATED (${promptsArray.length}/${quantity})`;
+        if (promptsArray.length > 0) {
+            btnDownload.style.display = 'block';
+            btnDeleteAll.style.display = 'block';
+        }
+
+        promptsArray.forEach((promptText, index) => {
+            const item = document.createElement('div');
+            item.className = 'prompt-item';
+            item.innerHTML = `
+                <div class="prompt-num">${index + 1}</div>
+                <textarea class="prompt-text" readonly>${promptText}</textarea>
+                <button class="btn-copy" title="Copy Prompt Only">
+                    <svg viewBox="0 0 24 24" width="18" height="18"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+                </button>
+            `;
+            item.querySelector('.btn-copy').addEventListener('click', () => {
+                const textEl = item.querySelector('.prompt-text');
+                navigator.clipboard.writeText(textEl.value).then(() => {
+                    showToast("Prompt Copied!");
+                });
+            });
+            container.appendChild(item);
+        });
+
+        btnDownload.onclick = () => {
+            const blob = new Blob([promptsArray.join('\n\n')], { type: 'text/plain' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            const nameNiche = niche.toLowerCase().replace(/[^a-z0-9]/g, '_');
+            link.download = `warmachine_${nameNiche}_prompts.txt`;
+            link.click();
+        };
+
+    } catch (error) {
+        console.error(error);
+        statusText.textContent = "ERROR GENERATING PROMPTS.";
+        alert(`Waduh, error bro! Detail: ${error.message || 'Cek parameter API Key atau koneksi internet lo.'}`);
+    } finally {
+        btnCreate.disabled = false;
+        btnSpinner.style.display = 'none';
+        btnText.textContent = "War Machine Arise";
+    }
+});
+</script>
+
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js').then((registration) => {
+      console.log('ServiceWorker registration successful with scope: ', registration.scope);
+    }, (err) => {
+      console.log('ServiceWorker registration failed: ', err);
+    });
+  });
+}
+</script>
+</body>
+</html>
