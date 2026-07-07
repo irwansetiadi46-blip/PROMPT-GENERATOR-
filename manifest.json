@@ -1,0 +1,28 @@
+{
+  "background_color": "#0b121e",
+  "dir": "ltr",
+  "display": "standalone",
+  "name": "War Machine: Super Masterprompt Engine",
+  "orientation": "any",
+  "scope": "/",
+  "short_name": "Masterprompt",
+  "start_url": "/",
+  "theme_color": "#f57c00",
+  "icons": [
+    {
+      "src": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj0yD7YVNT1YTpyeVUaXcm4Iit2alo469vB3s-8QE6SVtQ7G6qPQaA9KePSN5FK0L_l90icoCJd9KVK6wHVKJkzRVDHvWkaHUC1zlstpOilRiShVHx3LU-uXaq2Nto8_lcnrRLsi9r8Z5_-v3Xs_n_bmEWwzM1WsQ5YCXQ64XI0D0eQYE0SasDhYeIXA6U/s192/1000098443.png",
+      "type": "image/png",
+      "sizes": "192x105",
+      "isSquare": false,
+      "isPng": true,
+      "isWebp": false,
+      "isJpg": false,
+      "width": 192,
+      "is512x512": false,
+      "is256x256": false,
+      "is192x192": false
+    }
+  ],
+  "id": "com.masbonet.warmachine.masterprompt",
+  "description": "Super Masterprompt Engine v1.6.0. Designed by Irwan Setiadi under War Machine."
+}
