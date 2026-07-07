@@ -4,9 +4,9 @@
   "display": "standalone",
   "name": "War Machine: Super Masterprompt Engine",
   "orientation": "any",
-  "scope": "/",
+  "scope": "/PROMPT-GENERATOR-",
   "short_name": "Masterprompt",
-  "start_url": "/",
+  "start_url": "/PROMPT-GENERATOR-",
   "theme_color": "#f57c00",
     "icons": [
     {
