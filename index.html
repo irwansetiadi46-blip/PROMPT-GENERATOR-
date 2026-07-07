@@ -372,26 +372,30 @@
             fill: #ea580c;
         }
 
-        /* ---------- TOAST ---------- */
+                /* ---------- TOAST DI TENGAH (CENTER) ---------- */
         .toast-notif {
-            position: fixed;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%) translateY(100px);
+            position: absolute; 
+            top: 50%; /* Taruh di tengah vertikal container */
+            left: 50%; /* Taruh di tengah horizontal container */
+            /* Kita pakai translate untuk centering sempurna dan animasi scale (membesar) */
+            transform: translate(-50%, -50%) scale(0.7); 
             background-color: #10b981;
             color: #ffffff;
-            padding: 10px 24px;
+            padding: 14px 32px; /* Dibuat agak tebal biar makin jelas di tengah */
             border-radius: 30px;
             font-weight: bold;
-            font-size: 14px;
-            box-shadow: 0 6px 20px rgba(16,185,129,0.4);
+            font-size: 16px; /* Naik 1px biar gampang dibaca */
+            box-shadow: 0 15px 35px rgba(16,185,129,0.6);
             opacity: 0;
             transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            z-index: 9999;
+            z-index: 9999999 !important;
+            pointer-events: none;
         }
+        
+        /* Saat toast muncul, dia membesar ke ukuran asli (scale 1) */
         .toast-notif.show {
             opacity: 1;
-            transform: translateX(-50%) translateY(0);
+            transform: translate(-50%, -50%) scale(1);
         }
 
         /* ---------- RESPONSIF ---------- */
