@@ -287,7 +287,7 @@
             border-radius: 8px;
             padding: 12px;
             max-height: 700px;
-            min-height: 400px;
+            min-height: 300px;
             overflow-y: auto;
             display: flex;
             flex-direction: column;
@@ -547,9 +547,16 @@
     </div><!-- end war-machine-container -->
 </div><!-- end wm-wrapper-block -->
 
-<!-- TOAST -->
-<div class="toast-notif" id="toastAlert" style="position: fixed; z-index: 999999 !important;">Copy</div>
-
+function showToast(msg) {
+    const toast = document.getElementById('toastAlert');
+    toast.textContent = msg;
+    
+    // GANTI FIXED MENJADI ABSOLUTE DI SINI!
+    toast.style.position = 'absolute'; 
+    
+    toast.classList.add('show');
+    setTimeout(() => { toast.classList.remove('show'); }, 2000);
+}
 
 <script>
 // ============================================================
